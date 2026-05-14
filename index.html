@@ -72,6 +72,7 @@
     .btn-info { background: #3b82f6; color: white; margin-top: 10px; }
     
     .hidden { display: none !important; }
+    .hidden-soft { display: none !important; }
     
     .result-card {
       background: rgba(255,255,255,0.03); border: 1px solid var(--border);
@@ -79,11 +80,21 @@
     }
     .status-badge {
       display: inline-block; padding: 4px 12px; border-radius: 8px; font-weight: bold; font-size: 0.8rem;
-      background: rgba(52,211,153,0.2); color: #34d399; border: 1px solid rgba(52,211,153,0.5);
     }
+    .status-active { background: rgba(52,211,153,0.2); color: #34d399; border: 1px solid rgba(52,211,153,0.5); }
+    .status-modified { background: rgba(250,204,21,0.2); color: #facc15; border: 1px solid rgba(250,204,21,0.5); }
   </style>
 </head>
 <body class="p-4 md:p-8">
+
+  <div id="customAlertModal" class="fixed inset-0 z-[200] hidden-soft flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+    <div class="glass p-8 rounded-3xl max-w-sm w-full text-center relative border border-cyan-500/50">
+      <div id="alertIcon" class="text-5xl mb-4">🔔</div>
+      <h3 id="alertTitle" class="text-2xl font-black mb-2 text-white">تنبيه</h3>
+      <p id="alertMessage" class="text-slate-300 mb-6 font-bold text-sm leading-7"></p>
+      <div id="alertButtons" class="flex gap-3 justify-center"></div>
+    </div>
+  </div>
 
   <div id="loginView" class="max-w-md mx-auto w-full mt-10">
     <div class="text-center mb-8">
@@ -124,7 +135,7 @@
         <button onclick="goToBookingSystem()" class="btn btn-info w-auto px-6 py-3 text-sm rounded-xl">
           الذهاب للنظام 🚀
         </button>
-        <button onclick="endShift()" class="btn btn-danger w-auto px-6 py-3 text-sm rounded-xl">
+        <button onclick="confirmEndShift()" class="btn btn-danger w-auto px-6 py-3 text-sm rounded-xl">
           تسجيل انصراف <i class="fa-solid fa-right-from-bracket mr-2"></i>
         </button>
       </div>
@@ -132,7 +143,7 @@
 
     <div class="glass p-6 md:p-10 text-center">
       <i class="fa-solid fa-magnifying-glass text-5xl text-purple-400 mb-4 opacity-50"></i>
-      <h3 class="text-2xl font-black mb-6">البحث السريع في الطلبات</h3>
+      <h3 class="text-2xl font-black mb-6">البحث السريع في الطلبات المفتوحة</h3>
       
       <form id="searchForm" class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
         <input type="tel" id="searchPhone" class="input-field" placeholder="أدخل رقم هاتف العميل..." required>
@@ -145,12 +156,8 @@
   </div>
 
   <script>
-    // ⚠️ ضع رابط السكربت المدمج الجديد هنا ⚠️
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyHQBBksY41VLmX12EwDepAwr7-zXppMTTbknyOHbg6oy0u39TbXrOFRq_uvcJUPlt4/exec";
-
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzLri07pwBi03u7R6ScZheKVvW9GPZyqlyg6bNepyHY-drLyPGlxCzbH-nbkVX_BGA/exec";
     let loggedInEmpCode = "";
-    
-    // ضع هنا رابط الصفحة الأخرى (صفحة الحجز) ليتم توجيه الموظف إليها
     const BOOKING_SYSTEM_URL = "https://futurersbooker-beep.github.io/Delivery/"; 
 
     function updateClock() {
@@ -162,6 +169,24 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
+
+    function showAlert(title, message, icon="🔔", isConfirm = false, confirmCallback = null) {
+        document.getElementById("alertTitle").innerText = title;
+        document.getElementById("alertMessage").innerText = message;
+        document.getElementById("alertIcon").innerText = icon;
+        const btnContainer = document.getElementById("alertButtons");
+        if(isConfirm) {
+            btnContainer.innerHTML = `
+                <button id="confirmYesBtn" class="bg-red-500 hover:bg-red-600 text-white w-full py-3 rounded-xl font-black text-lg transition">نعم، متأكد</button>
+                <button onclick="closeAlert()" class="glass w-full py-3 rounded-xl font-black text-lg hover:bg-white/10 transition text-white">إلغاء</button>
+            `;
+            document.getElementById("confirmYesBtn").onclick = () => { closeAlert(); if(confirmCallback) confirmCallback(); };
+        } else {
+            btnContainer.innerHTML = `<button onclick="closeAlert()" class="btn btn-primary py-3 rounded-xl font-black text-lg">فهمت</button>`;
+        }
+        document.getElementById("customAlertModal").classList.remove("hidden-soft");
+    }
+    function closeAlert() { document.getElementById("customAlertModal").classList.add("hidden-soft"); }
 
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -186,9 +211,6 @@
           document.getElementById("empNameDisplay").innerText = result.data.name;
           document.getElementById("loginView").classList.add("hidden");
           document.getElementById("dashboardView").classList.remove("hidden");
-          
-          // توجيه اختياري وتلقائي لصفحة النظام مع تمرير الكود
-          // window.location.href = BOOKING_SYSTEM_URL + "?emp=" + loggedInEmpCode;
         } else {
           msg.innerText = result.message;
           msg.classList.remove("hidden");
@@ -207,8 +229,11 @@
       window.open(BOOKING_SYSTEM_URL + "?emp=" + loggedInEmpCode, "_blank");
     }
 
+    function confirmEndShift() {
+      showAlert("تسجيل الانصراف", "هل أنت متأكد من إنهاء الشيفت وتسجيل الانصراف؟", "🚪", true, endShift);
+    }
+
     async function endShift() {
-      if (!confirm("هل أنت متأكد من إنهاء الشيفت وتسجيل الانصراف؟")) return;
       try {
         await fetch(SCRIPT_URL, {
           method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
@@ -219,9 +244,9 @@
         document.getElementById("dashboardView").classList.add("hidden");
         document.getElementById("loginView").classList.remove("hidden");
         document.getElementById("searchResults").innerHTML = "";
-        alert("تم تسجيل الانصراف بنجاح.");
+        showAlert("تم الانصراف", "تم تسجيل الانصراف بنجاح.", "✅");
       } catch(err) {
-        alert("خطأ في تسجيل الخروج.");
+        showAlert("خطأ", "حدث خطأ في تسجيل الخروج.", "❌");
       }
     }
 
@@ -242,8 +267,9 @@
         const result = await response.json();
 
         if (result.status === "success") {
-          let html = `<h4 class="text-xl font-bold mb-4 text-cyan-200">نتائج البحث (${result.data.length} طلبات):</h4>`;
+          let html = `<h4 class="text-xl font-bold mb-4 text-cyan-200">نتائج البحث (${result.data.length} طلبات نشطة):</h4>`;
           result.data.forEach(req => {
+            const badgeClass = req.status === "مُعدل" ? "status-modified" : "status-active";
             html += `
               <div class="result-card">
                 <div class="flex justify-between items-start mb-4 border-b border-white/10 pb-4">
@@ -251,10 +277,10 @@
                     <h5 class="text-xl font-black text-gold">${req.id}</h5>
                     <p class="text-slate-400 text-sm mt-1"><i class="fa-regular fa-clock"></i> ${req.timestamp}</p>
                   </div>
-                  <div class="status-badge">${req.status || "قيد الانتظار"}</div>
+                  <div class="status-badge ${badgeClass}">${req.status}</div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-bold">
-                  <div><span class="text-slate-400">الخدمة:</span> <span class="text-white">${req.serviceType}</span></div>
+                  <div><span class="text-slate-400">الخدمة الأساسية:</span> <span class="text-white">${req.serviceType}</span></div>
                   <div><span class="text-slate-400">رقم العميل:</span> <span class="text-cyan-300">${req.phone}</span></div>
                   <div class="md:col-span-2"><span class="text-slate-400">العنوان:</span> <span class="text-white">${req.details}</span></div>
                 </div>

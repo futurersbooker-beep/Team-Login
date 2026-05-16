@@ -7,6 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
     * { box-sizing: border-box; font-family: 'Cairo', sans-serif; }
     :root {
@@ -16,9 +17,10 @@
     }
     body {
       min-height: 100vh; color: white; margin: 0;
-      background: radial-gradient(circle at top left, rgba(34,211,238,0.15), transparent 30%),
-                  radial-gradient(circle at bottom right, rgba(168,85,247,0.15), transparent 30%),
-                  linear-gradient(145deg, #020617 0%, #07111f 100%);
+      background:
+        radial-gradient(circle at top left, rgba(34,211,238,0.15), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(168,85,247,0.15), transparent 30%),
+        linear-gradient(145deg, #020617 0%, #07111f 100%);
       display: flex; flex-direction: column; overflow-x: hidden;
     }
     .glass { background: var(--panel); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
@@ -27,7 +29,7 @@
     .input-field:focus { border-color: var(--cyan); box-shadow: 0 0 15px rgba(34,211,238,0.3); }
     .themed-button { background: var(--accent-gradient); color: #06101e; border: none; cursor:pointer; font-weight: 900; transition: 0.3s; box-shadow: 0 0 20px rgba(34,211,238,0.2); }
     .themed-button:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(168,85,247,0.4); }
-    
+
     .table-container { overflow-x: auto; border-radius: 16px; border: 1px solid var(--border); background: rgba(255,255,255,0.02); margin-bottom: 60px; }
     table { width: 100%; text-align: right; border-collapse: collapse; white-space: nowrap; }
     th { background: rgba(0,0,0,0.6); padding: 16px; color: var(--cyan); font-weight: 900; border-bottom: 2px solid var(--border); }
@@ -43,7 +45,7 @@
     .giant-clock-container { text-align: center; margin: 30px 0; text-shadow: 0 0 30px rgba(34,211,238,0.4); width: 100%; }
     .giant-time { font-size: clamp(3.5rem, 15vw, 6.5rem); font-weight: 900; line-height: 1.1; background: linear-gradient(to bottom, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; }
     .giant-date { font-size: clamp(1rem, 4vw, 1.5rem); color: var(--cyan); font-weight: 700; margin-top: 5px; }
-    
+
     ::-webkit-scrollbar { height: 8px; width: 8px; }
     ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 10px; }
     ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 10px; }
@@ -53,13 +55,13 @@
     .task-tab { background: rgba(34,211,238,0.15); border: 1px solid var(--cyan); color: white; padding: 8px 16px; border-radius: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; white-space: nowrap; font-size: 0.9rem; }
     .task-tab:hover { background: rgba(34,211,238,0.3); }
     .task-tab.active { background: var(--cyan); color: #020617; }
-    
+
     .admin-tab-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 10px 20px; border-radius: 12px; font-weight: bold; transition: 0.3s; cursor: pointer; }
     .admin-tab-btn.active { background: rgba(168,85,247,0.2); border-color: var(--purple); color: #c084fc; }
   </style>
 </head>
-<body class="p-4 md:p-8">
 
+<body class="p-4 md:p-8">
   <div id="customAlertModal" class="fixed inset-0 z-[500] hidden-soft flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
     <div class="glass p-8 rounded-3xl max-w-sm w-full text-center border border-cyan-500/50 fade-up">
       <div id="alertIcon" class="text-5xl mb-4">🔔</div>
@@ -117,9 +119,9 @@
 
     <div id="ordersSection">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-         <div class="glass p-6 text-center border-b-4 border-cyan-400"><p class="text-slate-400 font-bold">طلبات تخصك</p><h3 class="text-5xl font-black mt-3" id="statMine">0</h3></div>
-         <div class="glass p-6 text-center border-b-4 border-gold"><p class="text-slate-400 font-bold">إجمالي الطلبات المفتوحة</p><h3 class="text-5xl font-black mt-3" id="statOpen">0</h3></div>
-         <div class="glass p-6 text-center border-b-4 border-emerald-400"><p class="text-slate-400 font-bold">إجمالي المعروض</p><h3 class="text-5xl font-black mt-3" id="statTotal">0</h3></div>
+        <div class="glass p-6 text-center border-b-4 border-cyan-400"><p class="text-slate-400 font-bold">طلبات تخصك</p><h3 class="text-5xl font-black mt-3" id="statMine">0</h3></div>
+        <div class="glass p-6 text-center border-b-4 border-gold"><p class="text-slate-400 font-bold">إجمالي الطلبات المفتوحة</p><h3 class="text-5xl font-black mt-3" id="statOpen">0</h3></div>
+        <div class="glass p-6 text-center border-b-4 border-emerald-400"><p class="text-slate-400 font-bold">إجمالي المعروض</p><h3 class="text-5xl font-black mt-3" id="statTotal">0</h3></div>
       </div>
 
       <div class="glass p-6" id="tableContainerEl">
@@ -133,6 +135,7 @@
             </div>
           </div>
         </div>
+
         <div class="table-container">
           <table>
             <thead>
@@ -158,7 +161,7 @@
             <button onclick="openEmpModal()" id="btnAddEmp" class="themed-button px-6 py-2 rounded-xl text-sm"><i class="fa-solid fa-plus"></i> موظف جديد</button>
           </div>
         </div>
-        
+
         <div class="table-container" id="adminEmpsContent">
           <table>
             <thead><tr><th>ID</th><th>الاسم</th><th>الهاتف</th><th>الراتب</th><th>تاريخ البدء</th><th class="text-center">إجراءات</th></tr></thead>
@@ -179,7 +182,7 @@
   <div id="orderDetailsModal" class="fixed inset-0 z-[100] hidden-soft flex items-center justify-center bg-black/80 backdrop-blur-md p-4 overflow-y-auto">
     <div class="glass p-6 md:p-8 rounded-3xl max-w-3xl w-full fade-up relative my-8 border border-cyan-500/40" id="detailModalContent">
       <button onclick="closeDetailsModal()" class="absolute top-6 left-6 text-slate-400 hover:text-white text-3xl transition"><i class="fa-solid fa-xmark"></i></button>
-      
+
       <div class="text-center mb-6 border-b border-white/10 pb-6">
         <div class="text-5xl mb-2">🧾</div>
         <h3 class="text-3xl font-black text-white mb-2">تفاصيل الطلب الكاملة</h3>
@@ -196,7 +199,6 @@
         <div class="bg-white/5 p-4 rounded-xl border border-white/10"><div class="text-slate-400 text-sm mb-1">طريقة الدفع</div><div class="font-bold text-purple-400 text-lg" id="detailPayment">--</div></div>
         <div class="bg-white/5 p-4 rounded-xl border border-white/10"><div class="text-slate-400 text-sm mb-1">العربون</div><div class="font-bold text-gold text-lg" id="detailDeposit">--</div></div>
         <div class="bg-white/5 p-4 rounded-xl border border-white/10 md:col-span-2"><div class="text-slate-400 text-sm mb-1">ملاحظات الطلب</div><div class="font-bold text-white text-lg" id="detailNotes">--</div></div>
-        
         <div class="bg-cyan-900/40 p-4 rounded-xl border border-cyan-500/30"><div class="text-cyan-200 text-sm mb-1">الموظف المنشئ</div><div class="font-black text-xl text-white" id="detailTakingEmp">--</div></div>
         <div class="bg-emerald-900/40 p-4 rounded-xl border border-emerald-500/30"><div class="text-emerald-200 text-sm mb-1">المندوب (المستلم)</div><div class="font-black text-xl text-white" id="detailReceivingEmp">--</div></div>
       </div>
@@ -206,7 +208,7 @@
           <i class="fa-solid fa-hand-holding-hand"></i> استلام الأوردر للمندوب
         </button>
         <button id="btnProceedToEdit" class="themed-button w-full py-4 rounded-xl font-black text-xl shadow-lg transition">
-           فتح الأوردر للتعديل/الإغلاق <i class="fa-solid fa-folder-open ml-2"></i>
+          فتح الأوردر للتعديل/الإغلاق <i class="fa-solid fa-folder-open ml-2"></i>
         </button>
       </div>
     </div>
@@ -234,14 +236,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           <div class="lg:col-span-2"><label class="block text-slate-300 font-bold mb-2">اسم العميل</label><input type="text" id="wsName" class="input-field" required></div>
           <div><label class="block text-slate-300 font-bold mb-2">الخدمة</label><input type="text" id="wsServiceDisplay" class="input-field text-cyan-200" disabled></div>
-          
           <div><label class="block text-slate-300 font-bold mb-2">الهاتف الأساسي</label><input type="tel" id="wsPhone" class="input-field text-emerald-300" required oninput="onlyDigits(this)" maxlength="11"></div>
           <div><label class="block text-slate-300 font-bold mb-2">هاتف بديل</label><input type="tel" id="wsAltPhone" class="input-field text-emerald-300" oninput="onlyDigits(this)" maxlength="11"></div>
           <div><label class="block text-slate-300 font-bold mb-2">العربون (أرقام)</label><input type="text" id="wsDeposit" class="input-field text-gold" oninput="onlyDigits(this)"></div>
-
           <div class="md:col-span-2 lg:col-span-3"><label class="block text-slate-300 font-bold mb-2">مكان التسليم (العنوان)</label><input type="text" id="wsAddress" class="input-field" required></div>
           <div class="md:col-span-2 lg:col-span-3"><label class="block text-slate-300 font-bold mb-2">مكان الاستلام</label><input type="text" id="wsPickup" class="input-field"></div>
-          
           <div class="md:col-span-2 lg:col-span-3"><label class="block text-slate-300 font-bold mb-2">طريقة الدفع</label><input type="text" id="wsPayment" class="input-field text-purple-300"></div>
           <div class="md:col-span-2 lg:col-span-3"><label class="block text-slate-300 font-bold mb-2">الملاحظات</label><textarea id="wsNotes" rows="3" class="input-field resize-none"></textarea></div>
         </div>
@@ -262,28 +261,22 @@
     <div class="glass p-6 md:p-8 rounded-3xl max-w-2xl w-full fade-up relative my-8 border border-purple-500/40" id="empModalContent">
       <button onclick="closeEmpModal()" class="absolute top-6 left-6 text-slate-400 hover:text-white text-3xl transition"><i class="fa-solid fa-xmark"></i></button>
       <h3 class="text-2xl font-black text-purple-400 mb-6 border-b border-white/10 pb-4" id="empModalTitle">إضافة موظف جديد</h3>
-      
+
       <form id="empForm" class="space-y-4">
         <input type="hidden" id="empOriginalId">
-        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
           <div><label class="block text-slate-300 font-bold mb-1">ID الموظف (مثال A03)</label><input type="text" id="empNewId" class="input-field border-purple-500/30" required></div>
           <div><label class="block text-slate-300 font-bold mb-1">اسم الموظف</label><input type="text" id="empNewName" class="input-field" required></div>
-          
           <div><label class="block text-slate-300 font-bold mb-1">كلمة المرور</label><input type="text" id="empNewPass" class="input-field" required></div>
           <div><label class="block text-slate-300 font-bold mb-1">الهاتف الأساسي</label><input type="tel" id="empNewPhone" class="input-field" required oninput="onlyDigits(this)" maxlength="11"></div>
-          
           <div><label class="block text-slate-300 font-bold mb-1">هاتف بديل (اختياري)</label><input type="tel" id="empAltPhone" class="input-field" oninput="onlyDigits(this)" maxlength="11"></div>
           <div><label class="block text-slate-300 font-bold mb-1">البريد الإلكتروني (الإيميل)</label><input type="email" id="empEmail" class="input-field" required></div>
-          
           <div><label class="block text-slate-300 font-bold mb-1">تاريخ بداية العمل</label><input type="date" id="empStartDate" class="input-field" required></div>
           <div><label class="block text-slate-300 font-bold mb-1">الراتب المتفق عليه</label><input type="text" id="empSalary" class="input-field" required oninput="onlyDigits(this)"></div>
-          
           <div class="md:col-span-2"><label class="block text-slate-300 font-bold mb-1">العنوان بالتفصيل</label><input type="text" id="empAddress" class="input-field" required></div>
-          
           <div class="md:col-span-2 bg-white/5 p-4 rounded-xl border border-white/10 border-dashed">
             <label class="block text-slate-300 font-bold mb-2"><i class="fa-regular fa-id-card text-cyan-400"></i> رفع صورة البطاقة</label>
-            <p class="text-xs text-slate-400 mb-2">الصورة يتم تشفيرها وحفظها كنص داخل الشيت مباشرة، إجبارية للموظف الجديد.</p>
+            <p class="text-xs text-slate-400 mb-2">الصورة سيتم رفعها إلى Google Drive وحفظ الرابط داخل الشيت.</p>
             <input type="file" id="empIdCard" accept="image/*" class="w-full text-sm text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-cyan-500/20 file:text-cyan-400 hover:file:bg-cyan-500/30 cursor-pointer">
           </div>
         </div>
@@ -299,131 +292,259 @@
   <div id="taskbar" class="hidden-soft"></div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6cYh53MeivjbmS3qJ5wAJioHfbJ8mz0vr6sh4-NZN8-g_Zr27lGWio78xwtxUV7c/exec"; // ⚠️ ضع رابط النشر الجديد هنا
+    // ===== CONFIG =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyiVPxB8zSllSoJ6HOUkHl2_AwmKBUx_e8bxQe96W-zvCBM52jfYDCKmmNprKljCyKY/exec";
+
+    // ===== STATUS SYSTEM =====
+    const STATUS_CODES = Object.freeze({
+      NEW: "NEW",
+      UPDATED: "UPDATED",
+      DELIVERING: "DELIVERING",
+      CANCELLED: "CANCELLED",
+      DONE: "DONE"
+    });
+
+    const STATUS_LABELS = Object.freeze({
+      NEW: "نشط",
+      UPDATED: "مُعدل",
+      DELIVERING: "جاري التوصيل 🚚",
+      CANCELLED: "ملغى ❌",
+      DONE: "مغلق وتم التوصيل ✅"
+    });
+
+    // ===== STATE MANAGEMENT =====
+    const appState = {
+      currentService: null,
+      paymentMethod: null,
+      employee: null,
+      currentOrder: null,
+      mode: "new",
+      loading: false
+    };
+
     let loggedInEmp = "";
+    let sessionToken = localStorage.getItem("deliverySessionToken") || "";
     let isAdmin = false;
     let ordersCache = [];
     let currentViewOrderId = "";
-    let openTasks = {}; 
+    let openTasks = {};
     let allEmps = [];
 
+    // ===== DOM CACHE =====
+    const $ = (id) => document.getElementById(id);
+
+    // ===== UTILITIES =====
     function updateClock() {
       const now = new Date();
-      document.getElementById("loginClock").innerText = now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute:'2-digit', second:'2-digit' });
-      document.getElementById("loginDate").innerText = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      $("loginClock").innerText = now.toLocaleTimeString("en-US", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      $("loginDate").innerText = now.toLocaleDateString("ar-EG", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
     }
-    setInterval(updateClock, 1000); updateClock();
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    function showLoading() { document.getElementById("loadingOverlay").classList.remove("hidden-soft"); }
-    function hideLoading() { document.getElementById("loadingOverlay").classList.add("hidden-soft"); }
-    function onlyDigits(el) { el.value = el.value.replace(/[^0-9]/g, ""); }
+    function showLoading() {
+      appState.loading = true;
+      $("loadingOverlay").classList.remove("hidden-soft");
+    }
+
+    function hideLoading() {
+      appState.loading = false;
+      $("loadingOverlay").classList.add("hidden-soft");
+    }
+
+    function onlyDigits(el) {
+      el.value = el.value.replace(/[^0-9]/g, "");
+    }
+
+    function normalizeCode(code) {
+      return (code || "").toString().trim().toUpperCase();
+    }
+
+    function employeePayload(payload = {}) {
+      const code = loggedInEmp || appState.employee || "";
+      return {
+        ...payload,
+        empCode: code,
+        employeeLetter: code,
+        sessionToken
+      };
+    }
+
+    async function apiPost(payload) {
+      const res = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(employeePayload(payload))
+      });
+      return await res.json();
+    }
 
     function getFileBase64(file) {
       return new Promise((resolve, reject) => {
         if (!file) return resolve("");
         const reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(',')[1]); // استخراج الـ Base64 فقط
-        reader.onerror = error => reject(error);
+        reader.onload = () => resolve(reader.result.split(",")[1]);
+        reader.onerror = reject;
         reader.readAsDataURL(file);
       });
     }
 
-    function viewImage(base64Str) {
-      document.getElementById("viewerImage").src = "data:image/png;base64," + base64Str;
-      document.getElementById("imageViewerModal").classList.remove("hidden-soft");
+    function safeText(value, fallback = "--") {
+      return value || fallback;
     }
-    function closeImageViewer() { document.getElementById("imageViewerModal").classList.add("hidden-soft"); }
 
-    function showAlert(title, message, icon="🔔", isConfirm=false, cb=null) {
-      document.getElementById("alertTitle").innerText = title;
-      document.getElementById("alertMessage").innerText = message;
-      document.getElementById("alertIcon").innerText = icon;
-      const bc = document.getElementById("alertButtons");
-      if(isConfirm) {
+    function getStatusCode(req) {
+      if (req.statusCode && STATUS_LABELS[req.statusCode]) return req.statusCode;
+      if (req.status === "مُعدل") return STATUS_CODES.UPDATED;
+      if (req.status === "جاري التوصيل 🚚") return STATUS_CODES.DELIVERING;
+      if ((req.status || "").includes("مغلق")) return STATUS_CODES.DONE;
+      if ((req.status || "").includes("ملغى")) return STATUS_CODES.CANCELLED;
+      return STATUS_CODES.NEW;
+    }
+
+    function getStatusLabel(req) {
+      return STATUS_LABELS[getStatusCode(req)] || req.status || "نشط";
+    }
+
+    function isClosedOrder(data) {
+      const code = data.statusCode || getStatusCode(data);
+      return code === STATUS_CODES.DONE || code === STATUS_CODES.CANCELLED || data.service === "طلب مغلق" || data.service === "طلب إلغاء";
+    }
+
+    // ===== UI =====
+    function viewImage(src) {
+      if (!src) return;
+      $("viewerImage").src = src.startsWith("http") ? src : "data:image/png;base64," + src;
+      $("imageViewerModal").classList.remove("hidden-soft");
+    }
+
+    function closeImageViewer() {
+      $("imageViewerModal").classList.add("hidden-soft");
+    }
+
+    function showAlert(title, message, icon = "🔔", isConfirm = false, cb = null) {
+      $("alertTitle").innerText = title;
+      $("alertMessage").innerText = message;
+      $("alertIcon").innerText = icon;
+      const bc = $("alertButtons");
+
+      if (isConfirm) {
         bc.innerHTML = `
           <button id="yBtn" class="bg-red-500 hover:bg-red-600 transition px-6 py-3 rounded-xl font-bold w-full text-white">تأكيد</button>
           <button onclick="closeAlert()" class="bg-white/10 hover:bg-white/20 transition px-6 py-3 rounded-xl font-bold w-full text-white">إلغاء</button>`;
-        document.getElementById("yBtn").onclick = () => { closeAlert(); cb(); };
+        $("yBtn").onclick = () => { closeAlert(); if (cb) cb(); };
       } else {
         bc.innerHTML = `<button onclick="closeAlert()" class="themed-button px-10 py-3 rounded-xl w-full text-lg">فهمت</button>`;
       }
-      document.getElementById("customAlertModal").classList.remove("hidden-soft");
-    }
-    function closeAlert() { document.getElementById("customAlertModal").classList.add("hidden-soft"); }
 
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      $("customAlertModal").classList.remove("hidden-soft");
+    }
+
+    function closeAlert() {
+      $("customAlertModal").classList.add("hidden-soft");
+    }
+
+    // ===== API / LOGIN =====
+    $("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const code = document.getElementById("empCode").value.trim().toUpperCase();
-      const pass = document.getElementById("empPass").value;
-      
+
+      const code = normalizeCode($("empCode").value);
+      const pass = $("empPass").value;
+
       showLoading();
       try {
-        const res = await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify({ action: "login", empCode: code, password: pass }) }).then(r => r.json());
+        const res = await fetch(SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ action: "login", empCode: code, employeeLetter: code, password: pass })
+        }).then(r => r.json());
+
         hideLoading();
-        if(res.status === "success") {
+
+        if (res.status === "success") {
           loggedInEmp = code;
-          isAdmin = res.data.isAdmin;
-          document.getElementById("empNameDisplay").innerText = res.data.name;
-          document.getElementById("empCodeBadge").innerText = code;
-          
-          if(isAdmin) {
-            document.getElementById("btnAdminPanel").classList.remove("hidden-soft");
-            document.getElementById("avatarIcon").innerText = "👑";
-            document.getElementById("avatarIcon").classList.add("bg-purple-500/20", "border-purple-500/50");
+          appState.employee = code;
+          isAdmin = !!res.data.isAdmin;
+          sessionToken = res.data.sessionToken || "";
+          localStorage.setItem("deliverySessionToken", sessionToken);
+
+          $("empNameDisplay").innerText = res.data.name;
+          $("empCodeBadge").innerText = code;
+
+          if (isAdmin) {
+            $("btnAdminPanel").classList.remove("hidden-soft");
+            $("avatarIcon").innerText = "👑";
+            $("avatarIcon").classList.add("bg-purple-500/20", "border-purple-500/50");
           }
 
-          document.getElementById("loginView").classList.add("hidden-soft");
-          document.getElementById("dashboardView").classList.remove("hidden-soft");
+          $("loginView").classList.add("hidden-soft");
+          $("dashboardView").classList.remove("hidden-soft");
           loadOrders();
-        } else showAlert("فشل الدخول", res.message, "🚫");
-      } catch(e) { hideLoading(); showAlert("خطأ", "مشكلة في الاتصال بالسيرفر", "📡"); }
+        } else {
+          showAlert("فشل الدخول", res.message, "🚫");
+        }
+      } catch (err) {
+        hideLoading();
+        showAlert("خطأ", "مشكلة في الاتصال بالسيرفر", "📡");
+      }
     });
 
     async function loadOrders() {
-      const tbody = document.getElementById("tableBody");
+      const tbody = $("tableBody");
       tbody.innerHTML = '<tr><td colspan="7" class="text-center py-10 text-cyan-400 font-bold text-xl animate-pulse">جاري سحب البيانات...</td></tr>';
-      
+
       try {
-        const res = await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify({ action: "search", empCode: loggedInEmp, phone: "" }) }).then(r => r.json());
-        if(res.status === "success") {
-          ordersCache = res.data.reverse(); 
-          filterTable(); 
+        const res = await apiPost({ action: "search", phone: "" });
+
+        if (res.status === "success") {
+          ordersCache = (res.data || []).reverse();
+          filterTable();
         } else {
           ordersCache = [];
           renderTable([]);
         }
-      } catch(e) { 
+      } catch (err) {
         tbody.innerHTML = '<tr><td colspan="7" class="text-center py-10 text-red-400 font-bold text-lg">حدث خطأ. حاول التحديث.</td></tr>';
       }
     }
 
+    // ===== ORDER TABLE =====
     function renderTable(data) {
-      const tbody = document.getElementById("tableBody");
+      const tbody = $("tableBody");
       let mine = 0, open = 0, total = data.length;
-      
-      if(data.length === 0) {
+
+      if (data.length === 0) {
         tbody.innerHTML = '<tr><td colspan="7" class="text-center py-10 text-slate-400 font-bold text-lg">لا توجد طلبات مطابقة للبحث.</td></tr>';
       } else {
         tbody.innerHTML = data.map(req => {
-          if(req.takingEmp === loggedInEmp || req.receivingEmp === loggedInEmp) mine++;
-          if(!req.receivingEmp || req.receivingEmp === "W" || req.receivingEmp === "Admin") open++;
-          
+          const statusCode = getStatusCode(req);
+          const statusLabel = getStatusLabel(req);
+
+          if (req.takingEmp === loggedInEmp || req.receivingEmp === loggedInEmp) mine++;
+          if (!req.receivingEmp || req.receivingEmp === "W" || req.receivingEmp === "ADMIN" || req.receivingEmp === "Admin") open++;
+
           let statClass = "text-emerald-400";
           let rowClass = "transition";
-          if (req.status === "مُعدل") statClass = "text-gold";
-          if (req.status === "جاري التوصيل 🚚") statClass = "text-cyan-400";
-          if (req.status.includes("مغلق") || req.status.includes("ملغى")) { statClass = "text-slate-400"; rowClass += " row-closed"; }
 
-          let recBadge = req.receivingEmp ? `<span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-lg text-sm">${req.receivingEmp}</span>` : `<span class="bg-gold/20 text-gold border border-gold/30 px-3 py-1 rounded-lg text-sm">لم يستلم أحد</span>`;
-          
+          if (statusCode === STATUS_CODES.UPDATED) statClass = "text-gold";
+          if (statusCode === STATUS_CODES.DELIVERING) statClass = "text-cyan-400";
+          if (statusCode === STATUS_CODES.DONE || statusCode === STATUS_CODES.CANCELLED) {
+            statClass = "text-slate-400";
+            rowClass += " row-closed";
+          }
+
+          const recBadge = req.receivingEmp
+            ? `<span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-lg text-sm">${req.receivingEmp}</span>`
+            : `<span class="bg-gold/20 text-gold border border-gold/30 px-3 py-1 rounded-lg text-sm">لم يستلم أحد</span>`;
+
           return `
             <tr class="${rowClass}">
               <td class="text-gold tracking-wider text-lg">${req.id}</td>
-              <td class="text-sm text-slate-400" dir="ltr">${req.timestamp.substring(0,16)}</td>
-              <td><div class="text-white">${req.name || 'عميل'}</div><div class="text-cyan-300 text-sm">${req.phone}</div></td>
-              <td><span class="bg-white/10 px-3 py-1 rounded-lg text-sm">${req.takingEmp || 'W'}</span></td>
+              <td class="text-sm text-slate-400" dir="ltr">${(req.timestamp || "").substring(0,16)}</td>
+              <td><div class="text-white">${req.name || "عميل"}</div><div class="text-cyan-300 text-sm">${req.phone || ""}</div></td>
+              <td><span class="bg-white/10 px-3 py-1 rounded-lg text-sm">${req.takingEmp || "W"}</span></td>
               <td>${recBadge}</td>
-              <td class="font-black ${statClass}">${req.status}</td>
+              <td class="font-black ${statClass}">${statusLabel}</td>
               <td class="text-center">
                 <button onclick="viewOrderDetails('${req.id}')" class="bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500 hover:text-white border border-cyan-500/50 px-5 py-2 rounded-xl transition font-bold shadow-lg">
                   <i class="fa-solid fa-eye ml-1"></i> عرض
@@ -432,124 +553,151 @@
             </tr>`;
         }).join("");
       }
-      
-      document.getElementById("statMine").innerText = mine;
-      document.getElementById("statOpen").innerText = open;
-      document.getElementById("statTotal").innerText = total; 
+
+      $("statMine").innerText = mine;
+      $("statOpen").innerText = open;
+      $("statTotal").innerText = total;
     }
 
     function filterTable() {
-      const textQuery = document.getElementById("searchTable").value.trim().toLowerCase();
-      const dateQuery = document.getElementById("searchDate").value; 
-      
+      const textQuery = $("searchTable").value.trim().toLowerCase();
+      const dateQuery = $("searchDate").value;
+
       let filtered = ordersCache;
-      
-      if(textQuery) {
-        filtered = filtered.filter(req => req.id.toLowerCase().includes(textQuery) || req.phone.includes(textQuery) || (req.name && req.name.toLowerCase().includes(textQuery)));
+
+      if (textQuery) {
+        filtered = filtered.filter(req =>
+          (req.id || "").toLowerCase().includes(textQuery) ||
+          (req.phone || "").includes(textQuery) ||
+          ((req.name || "").toLowerCase().includes(textQuery))
+        );
       }
-      if(dateQuery) {
-        filtered = filtered.filter(req => req.timestamp.startsWith(dateQuery));
+
+      if (dateQuery) {
+        filtered = filtered.filter(req => (req.timestamp || "").startsWith(dateQuery));
       }
-      
+
       renderTable(filtered);
     }
 
+    // ===== ORDER DETAILS =====
     async function viewOrderDetails(id) {
-      closeWorkspace(); closeEmpModal(); // تنظيف الشاشات
+      closeWorkspace();
+      closeEmpModal();
+
       showLoading();
       currentViewOrderId = id;
+
       try {
-        const res = await fetch(SCRIPT_URL, {
-          method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({ action: "fetch_order", orderId: id, empCode: loggedInEmp })
-        }).then(r => r.json());
+        const res = await apiPost({ action: "fetch_order", orderId: id });
+
         hideLoading();
 
         if (res.status === "success") {
           const data = res.data;
-          
-          document.getElementById("detailId").innerText = data.id;
-          document.getElementById("detailService").innerText = data.service || "طلب توصيل";
-          document.getElementById("detailName").innerText = data.name || "غير محدد";
-          document.getElementById("detailPhone1").innerText = data.phone || "--";
-          document.getElementById("detailPhone2").innerText = data.altPhone || "--";
-          document.getElementById("detailAddress").innerText = data.address || "غير محدد";
-          
-          if(data.pickupAddress) {
-            document.getElementById("detailPickupBox").classList.remove("hidden-soft");
-            document.getElementById("detailPickup").innerText = data.pickupAddress;
-          } else {
-            document.getElementById("detailPickupBox").classList.add("hidden-soft");
-          }
-          
-          document.getElementById("detailPayment").innerText = data.payment || "غير محدد";
-          document.getElementById("detailDeposit").innerText = data.deposit || "0";
-          document.getElementById("detailNotes").innerText = data.notes || "لا توجد ملاحظات إضافية";
-          
-          document.getElementById("detailTakingEmp").innerText = data.takingEmp || "W";
-          document.getElementById("detailReceivingEmp").innerText = data.receivingEmp || "لم يستلم أحد بعد";
+          appState.currentOrder = data;
 
-          const btnRec = document.getElementById("btnReceiveOrder");
-          const btnEdit = document.getElementById("btnProceedToEdit");
+          $("detailId").innerText = data.id;
+          $("detailService").innerText = data.service || "طلب توصيل";
+          $("detailName").innerText = data.name || "غير محدد";
+          $("detailPhone1").innerText = data.phone || "--";
+          $("detailPhone2").innerText = data.altPhone || "--";
+          $("detailAddress").innerText = data.address || "غير محدد";
 
-          if(data.service === "طلب مغلق" || data.service === "طلب إلغاء") {
-             btnRec.classList.add("hidden-soft");
-             btnEdit.classList.add("hidden-soft");
+          if (data.pickupAddress) {
+            $("detailPickupBox").classList.remove("hidden-soft");
+            $("detailPickup").innerText = data.pickupAddress;
           } else {
-             btnEdit.classList.remove("hidden-soft");
-             if (!data.receivingEmp || data.receivingEmp === "W" || data.receivingEmp === "Admin") {
-                btnRec.classList.remove("hidden-soft");
-             } else {
-                btnRec.classList.add("hidden-soft");
-             }
+            $("detailPickupBox").classList.add("hidden-soft");
           }
 
-          openTasks[id] = data; 
-          document.getElementById("orderDetailsModal").classList.remove("hidden-soft");
-          setTimeout(() => { document.getElementById("detailModalContent").scrollIntoView({behavior:'smooth', block:'start'}); }, 100);
+          $("detailPayment").innerText = data.payment || "غير محدد";
+          $("detailDeposit").innerText = data.deposit || "0";
+          $("detailNotes").innerText = data.notes || "لا توجد ملاحظات إضافية";
+          $("detailTakingEmp").innerText = data.takingEmp || "W";
+          $("detailReceivingEmp").innerText = data.receivingEmp || "لم يستلم أحد بعد";
+
+          const btnRec = $("btnReceiveOrder");
+          const btnEdit = $("btnProceedToEdit");
+
+          if (isClosedOrder(data)) {
+            btnRec.classList.add("hidden-soft");
+            btnEdit.classList.add("hidden-soft");
+          } else {
+            btnEdit.classList.remove("hidden-soft");
+            if (!data.receivingEmp || data.receivingEmp === "W" || data.receivingEmp === "Admin" || data.receivingEmp === "ADMIN") {
+              btnRec.classList.remove("hidden-soft");
+            } else {
+              btnRec.classList.add("hidden-soft");
+            }
+          }
+
+          openTasks[id] = data;
+          $("orderDetailsModal").classList.remove("hidden-soft");
+          setTimeout(() => $("detailModalContent").scrollIntoView({ behavior: "smooth", block: "start" }), 100);
         } else {
           showAlert("خطأ", "لم يتم العثور على تفاصيل الطلب. قد يكون مغلق.", "❌");
         }
-      } catch (e) {
+      } catch (err) {
         hideLoading();
         showAlert("خطأ", "مشكلة في الاتصال لجلب بيانات الطلب.", "📡");
       }
     }
 
-    function closeDetailsModal() { document.getElementById("orderDetailsModal").classList.add("hidden-soft"); }
+    function closeDetailsModal() {
+      $("orderDetailsModal").classList.add("hidden-soft");
+    }
 
-    document.getElementById("btnReceiveOrder").addEventListener("click", () => {
+    $("btnReceiveOrder").addEventListener("click", () => {
       showAlert("تأكيد الاستلام", "هل تريد استلام هذا الطلب لتوصيله؟ سيتم تعيينك كمندوب لهذا الطلب.", "🚚", true, async () => {
-         closeDetailsModal();
-         showLoading();
-         try {
-           const payload = { action: "receive_order", orderId: currentViewOrderId, employeeLetter: loggedInEmp, ...openTasks[currentViewOrderId] };
-           const res = await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) }).then(r => r.json());
-           hideLoading();
-           if(res.status === "success") {
-             showAlert("تم الاستلام", "تم تعيينك كمندوب للطلب بنجاح! الأوردر الآن في عهدتك.", "✅");
-             loadOrders(); 
-           } else showAlert("خطأ", "فشل في تسجيل الاستلام.", "❌");
-         } catch(e) { hideLoading(); showAlert("خطأ", "فشل الاتصال.", "📡"); }
+        closeDetailsModal();
+        showLoading();
+
+        try {
+          const payload = {
+            action: "receive_order",
+            orderId: currentViewOrderId,
+            ...openTasks[currentViewOrderId],
+            originalTakingEmp: openTasks[currentViewOrderId]?.takingEmp || "W",
+            originalReceivingEmp: openTasks[currentViewOrderId]?.receivingEmp || ""
+          };
+
+          const res = await apiPost(payload);
+          hideLoading();
+
+          if (res.status === "success") {
+            showAlert("تم الاستلام", "تم تعيينك كمندوب للطلب بنجاح! الأوردر الآن في عهدتك.", "✅");
+            loadOrders();
+          } else {
+            showAlert("خطأ", res.message || "فشل في تسجيل الاستلام.", "❌");
+          }
+        } catch (err) {
+          hideLoading();
+          showAlert("خطأ", "فشل الاتصال.", "📡");
+        }
       });
     });
 
-    // --- Taskbar & Workspace ---
-    document.getElementById("btnProceedToEdit").addEventListener("click", () => {
-      closeDetailsModal(); 
+    // ===== TASKBAR / WORKSPACE =====
+    $("btnProceedToEdit").addEventListener("click", () => {
+      closeDetailsModal();
       const id = currentViewOrderId;
-      renderTaskbar(); 
+      renderTaskbar();
       openWorkspace(id);
     });
 
     function renderTaskbar() {
-      const tb = document.getElementById("taskbar");
+      const tb = $("taskbar");
       const keys = Object.keys(openTasks);
-      if(keys.length === 0) { tb.classList.add("hidden-soft"); return; }
-      
+
+      if (keys.length === 0) {
+        tb.classList.add("hidden-soft");
+        return;
+      }
+
       tb.classList.remove("hidden-soft");
       tb.innerHTML = keys.map(id => `
-        <div class="task-tab ${id === currentViewOrderId ? 'active' : ''}" onclick="openWorkspace('${id}')">
+        <div class="task-tab ${id === currentViewOrderId ? "active" : ""}" onclick="openWorkspace('${id}')">
           <i class="fa-solid fa-file-invoice text-lg"></i> ${id}
           <button onclick="event.stopPropagation(); closeTask('${id}')" class="mr-3 hover:text-red-500 text-lg transition"><i class="fa-solid fa-xmark"></i></button>
         </div>
@@ -557,258 +705,344 @@
     }
 
     function openWorkspace(id) {
-      closeDetailsModal(); closeEmpModal(); // تنظيف
+      closeDetailsModal();
+      closeEmpModal();
+
       currentViewOrderId = id;
       renderTaskbar();
+
       const data = openTasks[id];
-      if(!data) return;
+      if (!data) return;
 
-      document.getElementById("wsId").value = data.id;
-      document.getElementById("wsOrderIdBadge").innerText = "كود الطلب: " + data.id;
-      
-      document.getElementById("wsName").value = data.name || "";
-      document.getElementById("wsPhone").value = data.phone || "";
-      document.getElementById("wsAltPhone").value = data.altPhone || "";
-      document.getElementById("wsAddress").value = data.address || "";
-      document.getElementById("wsPickup").value = data.pickupAddress || "";
-      document.getElementById("wsPayment").value = data.payment || "";
-      document.getElementById("wsDeposit").value = data.deposit || "";
-      document.getElementById("wsNotes").value = data.notes || "";
-      document.getElementById("wsOriginalService").value = data.service || "طلب توصيل";
-      document.getElementById("wsServiceDisplay").value = data.service || "طلب توصيل";
-      document.getElementById("wsTakingEmp").value = data.takingEmp || "W";
-      document.getElementById("wsReceivingEmp").value = data.receivingEmp || "";
+      $("wsId").value = data.id;
+      $("wsOrderIdBadge").innerText = "كود الطلب: " + data.id;
+      $("wsName").value = data.name || "";
+      $("wsPhone").value = data.phone || "";
+      $("wsAltPhone").value = data.altPhone || "";
+      $("wsAddress").value = data.address || "";
+      $("wsPickup").value = data.pickupAddress || "";
+      $("wsPayment").value = data.payment || "";
+      $("wsDeposit").value = data.deposit || "";
+      $("wsNotes").value = data.notes || "";
+      $("wsOriginalService").value = data.service || "طلب توصيل";
+      $("wsServiceDisplay").value = data.service || "طلب توصيل";
+      $("wsTakingEmp").value = data.takingEmp || "W";
+      $("wsReceivingEmp").value = data.receivingEmp || "";
 
-      if (data.service === "طلب مغلق" || data.service === "طلب إلغاء") {
-        document.getElementById("btnCloseOrderWs").classList.add("hidden-soft");
+      if (isClosedOrder(data)) {
+        $("btnCloseOrderWs").classList.add("hidden-soft");
       } else {
-        document.getElementById("btnCloseOrderWs").classList.remove("hidden-soft");
+        $("btnCloseOrderWs").classList.remove("hidden-soft");
       }
 
-      document.getElementById("editWorkspaceModal").classList.remove("hidden-soft");
-      setTimeout(() => { document.getElementById("workspaceContent").scrollIntoView({behavior:'smooth', block:'start'}); }, 100);
+      $("editWorkspaceModal").classList.remove("hidden-soft");
+      setTimeout(() => $("workspaceContent").scrollIntoView({ behavior: "smooth", block: "start" }), 100);
     }
 
-    function minimizeWorkspace() { document.getElementById("editWorkspaceModal").classList.add("hidden-soft"); }
-    function closeWorkspace() { minimizeWorkspace(); }
-    function closeTask(id) { delete openTasks[id]; if(currentViewOrderId === id) minimizeWorkspace(); renderTaskbar(); }
+    function minimizeWorkspace() {
+      $("editWorkspaceModal").classList.add("hidden-soft");
+    }
+
+    function closeWorkspace() {
+      minimizeWorkspace();
+    }
+
+    function closeTask(id) {
+      delete openTasks[id];
+      if (currentViewOrderId === id) minimizeWorkspace();
+      renderTaskbar();
+    }
 
     async function submitWorkspace(actionType) {
-      const id = document.getElementById("wsId").value;
-      const name = document.getElementById("wsName").value.trim();
-      const phone = document.getElementById("wsPhone").value.trim();
-      if(!name || phone.length !== 11) { showAlert("بيانات ناقصة", "الاسم والهاتف (11 رقم) مطلوبان.", "⚠️"); return; }
-      
-      let confirmMsg = actionType === "close" ? "هل قمت بتسليم الطلب للعميل؟ سيتم إغلاق الأوردر نهائياً وتلوينه بالأخضر." : "هل تريد حفظ التعديلات على هذا الطلب؟";
-      
+      const id = $("wsId").value;
+      const name = $("wsName").value.trim();
+      const phone = $("wsPhone").value.trim();
+
+      if (!name || phone.length !== 11) {
+        showAlert("بيانات ناقصة", "الاسم والهاتف (11 رقم) مطلوبان.", "⚠️");
+        return;
+      }
+
+      const confirmMsg = actionType === "close"
+        ? "هل قمت بتسليم الطلب للعميل؟ سيتم إغلاق الأوردر نهائياً وتلوينه بالأخضر."
+        : "هل تريد حفظ التعديلات على هذا الطلب؟";
+
       showAlert("تأكيد العملية", confirmMsg, "❓", true, async () => {
         minimizeWorkspace();
         showLoading();
-        
+
         const payload = {
           action: actionType === "close" ? "close_order" : "update_order",
-          orderId: id, employeeLetter: loggedInEmp, 
-          name: name, phone: phone, 
-          altPhone: document.getElementById("wsAltPhone").value.trim(),
-          address: document.getElementById("wsAddress").value.trim(),
-          pickupAddress: document.getElementById("wsPickup").value.trim(),
-          payment: document.getElementById("wsPayment").value.trim(),
-          depositAmount: document.getElementById("wsDeposit").value.trim(),
-          notes: document.getElementById("wsNotes").value.trim(),
-          source: document.getElementById("wsOriginalService").value,
-          originalTakingEmp: document.getElementById("wsTakingEmp").value,
-          originalReceivingEmp: document.getElementById("wsReceivingEmp").value
+          orderId: id,
+          name,
+          phone,
+          altPhone: $("wsAltPhone").value.trim(),
+          address: $("wsAddress").value.trim(),
+          pickupAddress: $("wsPickup").value.trim(),
+          payment: $("wsPayment").value.trim(),
+          depositAmount: $("wsDeposit").value.trim(),
+          notes: $("wsNotes").value.trim(),
+          source: $("wsOriginalService").value,
+          originalTakingEmp: $("wsTakingEmp").value,
+          originalReceivingEmp: $("wsReceivingEmp").value
         };
 
         try {
-          const res = await fetch(SCRIPT_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) }).then(r => r.json());
+          const res = await apiPost(payload);
           hideLoading();
-          if(res.status === "success") {
+
+          if (res.status === "success") {
             showAlert("تمت العملية", actionType === "close" ? "تم إغلاق الطلب (تم التوصيل ✅)." : "تم حفظ التعديلات بنجاح.", "✅");
-            closeTask(id); loadOrders(); 
-          } else showAlert("خطأ", "فشل في حفظ البيانات.", "❌");
-        } catch(e) { hideLoading(); showAlert("خطأ اتصال", "فشل الإرسال للسيرفر.", "📡"); }
+            closeTask(id);
+            loadOrders();
+          } else {
+            showAlert("خطأ", res.message || "فشل في حفظ البيانات.", "❌");
+          }
+        } catch (err) {
+          hideLoading();
+          showAlert("خطأ اتصال", "فشل الإرسال للسيرفر.", "📡");
+        }
       });
     }
 
-    function confirmLogout() { 
+    // ===== LOGOUT =====
+    function confirmLogout() {
       showAlert("خروج", "هل تريد إنهاء الشيفت وإغلاق الجلسة الحالية؟", "🚪", true, async () => {
         showLoading();
-        await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify({ action: "logout", empCode: loggedInEmp }) });
+        try {
+          await apiPost({ action: "logout" });
+        } catch (err) {}
+        localStorage.removeItem("deliverySessionToken");
         location.reload();
-      }); 
+      });
     }
 
-    // --- Admin Functions ---
+    // ===== EMPLOYEE SYSTEM =====
     function toggleAdminPanel() {
-      const ordSec = document.getElementById("ordersSection");
-      const admSec = document.getElementById("adminSection");
-      if(admSec.classList.contains("hidden-soft")) {
+      const ordSec = $("ordersSection");
+      const admSec = $("adminSection");
+
+      if (admSec.classList.contains("hidden-soft")) {
         ordSec.classList.add("hidden-soft");
         admSec.classList.remove("hidden-soft");
-        document.getElementById("btnAdminPanel").innerHTML = '<i class="fa-solid fa-table-list"></i> الطلبات';
+        $("btnAdminPanel").innerHTML = '<i class="fa-solid fa-table-list"></i> الطلبات';
         refreshAdminData();
       } else {
         admSec.classList.add("hidden-soft");
         ordSec.classList.remove("hidden-soft");
-        document.getElementById("btnAdminPanel").innerHTML = '<i class="fa-solid fa-users-gear"></i> الإدارة';
+        $("btnAdminPanel").innerHTML = '<i class="fa-solid fa-users-gear"></i> الإدارة';
       }
     }
 
     function switchAdminTab(tabName) {
-      document.getElementById("tabEmps").classList.remove("active");
-      document.getElementById("tabLogs").classList.remove("active");
-      document.getElementById("adminEmpsContent").classList.add("hidden-soft");
-      document.getElementById("adminLogsContent").classList.add("hidden-soft");
-      document.getElementById("btnAddEmp").classList.add("hidden-soft");
+      $("tabEmps").classList.remove("active");
+      $("tabLogs").classList.remove("active");
+      $("adminEmpsContent").classList.add("hidden-soft");
+      $("adminLogsContent").classList.add("hidden-soft");
+      $("btnAddEmp").classList.add("hidden-soft");
 
-      if (tabName === 'emps') {
-        document.getElementById("tabEmps").classList.add("active");
-        document.getElementById("adminEmpsContent").classList.remove("hidden-soft");
-        document.getElementById("btnAddEmp").classList.remove("hidden-soft");
+      if (tabName === "emps") {
+        $("tabEmps").classList.add("active");
+        $("adminEmpsContent").classList.remove("hidden-soft");
+        $("btnAddEmp").classList.remove("hidden-soft");
         loadEmployees();
       } else {
-        document.getElementById("tabLogs").classList.add("active");
-        document.getElementById("adminLogsContent").classList.remove("hidden-soft");
+        $("tabLogs").classList.add("active");
+        $("adminLogsContent").classList.remove("hidden-soft");
         loadAttendance();
       }
     }
 
     function refreshAdminData() {
-      if (document.getElementById("tabEmps").classList.contains("active")) {
-        loadEmployees();
-      } else {
-        loadAttendance();
-      }
+      if ($("tabEmps").classList.contains("active")) loadEmployees();
+      else loadAttendance();
     }
 
     async function loadAttendance() {
       showLoading();
+
       try {
-        const res = await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify({ action: "get_attendance", empCode: loggedInEmp }) }).then(r=>r.json());
+        const res = await apiPost({ action: "get_attendance" });
         hideLoading();
-        if(res.status === "success") {
-          const tbody = document.getElementById("logTableBody");
-          if(res.data.length === 0) tbody.innerHTML = `<tr><td colspan="4" class="text-center text-slate-400 py-6">لا يوجد سجلات حضور</td></tr>`;
-          else tbody.innerHTML = res.data.map(log => `<tr><td class="text-purple-400 font-bold">${log.empCode}</td><td>${log.empName}</td><td dir="ltr" class="text-emerald-400 text-sm">${log.login}</td><td dir="ltr" class="text-gold text-sm">${log.logout}</td></tr>`).join("");
+
+        if (res.status === "success") {
+          const tbody = $("logTableBody");
+          if ((res.data || []).length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" class="text-center text-slate-400 py-6">لا يوجد سجلات حضور</td></tr>`;
+          } else {
+            tbody.innerHTML = res.data.map(log => `
+              <tr>
+                <td class="text-purple-400 font-bold">${log.empCode}</td>
+                <td>${log.empName}</td>
+                <td dir="ltr" class="text-emerald-400 text-sm">${log.login}</td>
+                <td dir="ltr" class="text-gold text-sm">${log.logout}</td>
+              </tr>
+            `).join("");
+          }
+        } else {
+          showAlert("خطأ", res.message || "فشل جلب السجلات", "❌");
         }
-      } catch(e) { hideLoading(); showAlert("خطأ", "فشل جلب السجلات", "❌"); }
+      } catch (err) {
+        hideLoading();
+        showAlert("خطأ", "فشل جلب السجلات", "❌");
+      }
     }
 
     async function loadEmployees() {
       showLoading();
+
       try {
-        const res = await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify({ action: "get_employees", empCode: loggedInEmp }) }).then(r=>r.json());
+        const res = await apiPost({ action: "get_employees" });
         hideLoading();
-        if(res.status === "success") {
-          allEmps = res.data;
+
+        if (res.status === "success") {
+          allEmps = res.data || [];
           renderEmpTable();
+        } else {
+          showAlert("خطأ", res.message || "فشل جلب الموظفين", "❌");
         }
-      } catch(e) { hideLoading(); showAlert("خطأ", "فشل جلب الموظفين", "❌"); }
+      } catch (err) {
+        hideLoading();
+        showAlert("خطأ", "فشل جلب الموظفين", "❌");
+      }
     }
 
     function renderEmpTable() {
-      const tbody = document.getElementById("empTableBody");
-      if(allEmps.length === 0) {
+      const tbody = $("empTableBody");
+
+      if (allEmps.length === 0) {
         tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-slate-400">لا يوجد موظفين مسجلين</td></tr>`;
         return;
       }
+
       tbody.innerHTML = allEmps.map(emp => {
-        let cardIcon = emp.idCard ? `<button onclick="viewImage('${emp.idCard}')" class="text-emerald-400 ml-2 hover:text-emerald-300 transition" title="عرض البطاقة المرفقة"><i class="fa-solid fa-id-card"></i></button>` : `<i class="fa-solid fa-id-card text-slate-600 ml-2" title="لا يوجد مرفق"></i>`;
+        const cardIcon = emp.idCard
+          ? `<button onclick="viewImage('${emp.idCard}')" class="text-emerald-400 ml-2 hover:text-emerald-300 transition" title="عرض البطاقة المرفقة"><i class="fa-solid fa-id-card"></i></button>`
+          : `<i class="fa-solid fa-id-card text-slate-600 ml-2" title="لا يوجد مرفق"></i>`;
+
         return `
-        <tr>
-          <td class="text-purple-400 font-black">${emp.id} ${cardIcon}</td>
-          <td>${emp.name}</td>
-          <td class="text-emerald-400" dir="ltr">${emp.phone}</td>
-          <td class="text-gold">${emp.salary}</td>
-          <td class="text-sm">${emp.startDate}</td>
-          <td class="text-center">
-            <button onclick='editEmp(${JSON.stringify(emp)})' class="bg-purple-500/20 text-purple-300 px-4 py-1 rounded hover:bg-purple-500 hover:text-white transition">تعديل</button>
-          </td>
-        </tr>
-      `}).join("");
+          <tr>
+            <td class="text-purple-400 font-black">${emp.id} ${cardIcon}</td>
+            <td>${emp.name}</td>
+            <td class="text-emerald-400" dir="ltr">${emp.phone}</td>
+            <td class="text-gold">${emp.salary}</td>
+            <td class="text-sm">${emp.startDate}</td>
+            <td class="text-center">
+              <button onclick='editEmp(${JSON.stringify(emp)})' class="bg-purple-500/20 text-purple-300 px-4 py-1 rounded hover:bg-purple-500 hover:text-white transition">تعديل</button>
+            </td>
+          </tr>`;
+      }).join("");
     }
 
     function openEmpModal() {
-      closeDetailsModal(); closeWorkspace(); 
-      document.getElementById("empForm").reset();
-      document.getElementById("empOriginalId").value = "";
-      document.getElementById("empNewId").disabled = false;
-      document.getElementById("empStartDate").value = new Date().toISOString().split("T")[0];
-      document.getElementById("empIdCard").required = true; 
-      document.getElementById("empModalTitle").innerText = "إضافة موظف جديد";
-      document.getElementById("btnDeleteEmp").classList.add("hidden-soft");
-      document.getElementById("empManageModal").classList.remove("hidden-soft");
-      setTimeout(() => { document.getElementById("empModalContent").scrollIntoView({behavior:'smooth', block:'start'}); }, 100);
+      closeDetailsModal();
+      closeWorkspace();
+
+      $("empForm").reset();
+      $("empOriginalId").value = "";
+      $("empNewId").disabled = false;
+      $("empStartDate").value = new Date().toISOString().split("T")[0];
+      $("empIdCard").required = true;
+      $("empModalTitle").innerText = "إضافة موظف جديد";
+      $("btnDeleteEmp").classList.add("hidden-soft");
+      $("empManageModal").classList.remove("hidden-soft");
+
+      setTimeout(() => $("empModalContent").scrollIntoView({ behavior: "smooth", block: "start" }), 100);
     }
 
     function editEmp(emp) {
-      closeDetailsModal(); closeWorkspace();
-      document.getElementById("empOriginalId").value = emp.id;
-      document.getElementById("empNewId").value = emp.id;
-      document.getElementById("empNewId").disabled = true; 
-      document.getElementById("empNewName").value = emp.name;
-      document.getElementById("empNewPass").value = emp.password;
-      document.getElementById("empNewPhone").value = emp.phone;
-      document.getElementById("empAltPhone").value = emp.altPhone || "";
-      document.getElementById("empEmail").value = emp.email || "";
-      document.getElementById("empSalary").value = emp.salary || "";
-      document.getElementById("empStartDate").value = emp.startDate || "";
-      document.getElementById("empAddress").value = emp.address || "";
-      
-      document.getElementById("empIdCard").required = false; 
-      document.getElementById("empModalTitle").innerText = "تعديل بيانات الموظف: " + emp.name;
-      document.getElementById("btnDeleteEmp").classList.remove("hidden-soft");
-      document.getElementById("empManageModal").classList.remove("hidden-soft");
-      setTimeout(() => { document.getElementById("empModalContent").scrollIntoView({behavior:'smooth', block:'start'}); }, 100);
+      closeDetailsModal();
+      closeWorkspace();
+
+      $("empOriginalId").value = emp.id;
+      $("empNewId").value = emp.id;
+      $("empNewId").disabled = true;
+      $("empNewName").value = emp.name;
+      $("empNewPass").value = emp.password;
+      $("empNewPhone").value = emp.phone;
+      $("empAltPhone").value = emp.altPhone || "";
+      $("empEmail").value = emp.email || "";
+      $("empSalary").value = emp.salary || "";
+      $("empStartDate").value = emp.startDate || "";
+      $("empAddress").value = emp.address || "";
+      $("empIdCard").required = false;
+      $("empModalTitle").innerText = "تعديل بيانات الموظف: " + emp.name;
+      $("btnDeleteEmp").classList.remove("hidden-soft");
+      $("empManageModal").classList.remove("hidden-soft");
+
+      setTimeout(() => $("empModalContent").scrollIntoView({ behavior: "smooth", block: "start" }), 100);
     }
 
-    function closeEmpModal() { document.getElementById("empManageModal").classList.add("hidden-soft"); }
+    function closeEmpModal() {
+      $("empManageModal").classList.add("hidden-soft");
+    }
 
-    document.getElementById("empForm").addEventListener("submit", async (e) => {
+    $("empForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      closeEmpModal(); showLoading();
-      
-      const fileInput = document.getElementById("empIdCard");
+
+      closeEmpModal();
+      showLoading();
+
+      const fileInput = $("empIdCard");
       let base64Image = "";
+
       if (fileInput.files.length > 0) {
         base64Image = await getFileBase64(fileInput.files[0]);
       }
 
       const payload = {
-        action: "save_employee", empCode: loggedInEmp,
-        empId: document.getElementById("empNewId").value.trim().toUpperCase(),
-        empName: document.getElementById("empNewName").value.trim(),
-        empPass: document.getElementById("empNewPass").value.trim(),
-        empPhone: document.getElementById("empNewPhone").value.trim(),
-        empAltPhone: document.getElementById("empAltPhone").value.trim(),
-        empEmail: document.getElementById("empEmail").value.trim(),
-        empSalary: document.getElementById("empSalary").value.trim(),
-        empStartDate: document.getElementById("empStartDate").value,
-        empAddress: document.getElementById("empAddress").value.trim(),
+        action: "save_employee",
+        empId: $("empNewId").value.trim().toUpperCase(),
+        empName: $("empNewName").value.trim(),
+        empPass: $("empNewPass").value.trim(),
+        empPhone: $("empNewPhone").value.trim(),
+        empAltPhone: $("empAltPhone").value.trim(),
+        empEmail: $("empEmail").value.trim(),
+        empSalary: $("empSalary").value.trim(),
+        empStartDate: $("empStartDate").value,
+        empAddress: $("empAddress").value.trim(),
         empIdCard: base64Image,
-        isNew: document.getElementById("empOriginalId").value === ""
+        isNew: $("empOriginalId").value === ""
       };
 
       try {
-        const res = await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) }).then(r=>r.json());
+        const res = await apiPost(payload);
         hideLoading();
-        if(res.status==="success") { showAlert("نجاح", "تم حفظ بيانات الموظف بنجاح", "✅"); loadEmployees(); }
-        else showAlert("خطأ", res.message, "❌");
-      } catch(e) { hideLoading(); showAlert("خطأ", "فشل الاتصال بالسيرفر", "📡"); }
+
+        if (res.status === "success") {
+          showAlert("نجاح", "تم حفظ بيانات الموظف بنجاح", "✅");
+          loadEmployees();
+        } else {
+          showAlert("خطأ", res.message || "فشل حفظ بيانات الموظف", "❌");
+        }
+      } catch (err) {
+        hideLoading();
+        showAlert("خطأ", "فشل الاتصال بالسيرفر", "📡");
+      }
     });
 
     function deleteEmp() {
-      const empId = document.getElementById("empOriginalId").value;
+      const empId = $("empOriginalId").value;
+
       closeEmpModal();
+
       showAlert("حذف موظف", "هل أنت متأكد من حذف الموظف " + empId + " نهائياً؟ لا يمكن التراجع.", "⚠️", true, async () => {
         showLoading();
+
         try {
-          const res = await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify({ action: "delete_employee", empCode: loggedInEmp, targetId: empId }) }).then(r=>r.json());
+          const res = await apiPost({ action: "delete_employee", targetId: empId });
           hideLoading();
-          if(res.status==="success") { showAlert("نجاح", "تم الحذف بنجاح", "✅"); loadEmployees(); }
-          else showAlert("خطأ", res.message, "❌");
-        } catch(e) { hideLoading(); showAlert("خطأ", "فشل الاتصال", "📡"); }
+
+          if (res.status === "success") {
+            showAlert("نجاح", "تم الحذف بنجاح", "✅");
+            loadEmployees();
+          } else {
+            showAlert("خطأ", res.message || "فشل حذف الموظف", "❌");
+          }
+        } catch (err) {
+          hideLoading();
+          showAlert("خطأ", "فشل الاتصال", "📡");
+        }
       });
     }
   </script>
